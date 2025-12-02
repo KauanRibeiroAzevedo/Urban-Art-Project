@@ -1,0 +1,9 @@
+<?php
+
+$servername = "kauanproject"; // CHANGE THIS
+$username = "root";
+$password = "";
+$dbname = "Urbanarts_db";
+$port = 3306; // MAYBE CHANGE THIS
+
+?>

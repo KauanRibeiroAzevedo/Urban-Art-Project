@@ -1,27 +1,24 @@
-function loginUser() {
-    const formdata = new FormData(document.getElementById("login"));
-    
-    fetch("login.php", {
-        method: "POST",
-        body: formdata
-    })
-    .then((response) => {
-        if (response.ok) {
-            return response.json();
-        }
-        throw new Error("Network response was not ok");
-    })
-    .then((data) => {
-        if (data.success) {
-            document.getElementById("login_response").innerHTML = data.message;
-            document.getElementById("user_name").innerHTML = formdata.get("username");
-            closeModal();
-        } else {
-            document.getElementById("login_response").innerHTML = data.message;
-        }
-    })
-    .catch((error) => {
-        console.error("Error:", error);
-        document.getElementById("login_response").innerHTML = "Login failed: " + error.message;
-    });
+function updateArtworkList() {
+    let artist = document.getElementById("artist").value;
+
+    fetch("load_artworks.php?artist=" + artist)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("artwork_response").innerHTML = data;
+        });
+}
+
+function openArtworkModal(id) {
+    fetch("load_artwork_modal.php?id=" + id)
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById("artwork_modal_content").innerHTML = html;
+            document.getElementById("artwork_modal").style.display = "block";
+            document.getElementById("backdrop").style.display = "block";
+        });
+}
+
+function closeModal() {
+    document.getElementById("artwork_modal").style.display = "none";
+    document.getElementById("backdrop").style.display = "none";
 }
