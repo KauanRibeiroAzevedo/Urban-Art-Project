@@ -7,8 +7,8 @@ define('DB_COLUMN_EMAIL', 'email');
 define('DB_COLUMN_PASSWORD_HASH', 'password_hash');
 
 // Session keys
-define('SESSION_USERNAME', 'username');
-define('SESSION_USER_ID', 'user_id');
+define('SESSION_USESESSION_USER_IDRNAME', 'username');
+define('', 'user_id');
 define('SESSION_LOGGED_IN', 'logged_in');
 
 // URLs
