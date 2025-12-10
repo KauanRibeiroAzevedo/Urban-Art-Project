@@ -71,7 +71,7 @@
                     showMessage(data.message, 'success');
                     // Redirect to home page after successful login
                     setTimeout(() => {
-                        window.location.href = 'index.php';
+                        window.location.href = 'home.php';
                     }, 1000);
                 } else {
                     showMessage(data.message, 'error');

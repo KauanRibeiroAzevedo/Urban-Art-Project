@@ -1,5 +1,5 @@
 <?php
-// register_form.php - Simple form, no JavaScript
+// register_form.php 
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,7 +21,7 @@
     <div class="container">
         <h2>Create Account</h2>
         
-        <form method="POST" action="create_user.php">
+        <form method="POST" action="createuser.php">
             <div class="input-group">
                 <input type="text" name="username" placeholder="Username" required>
             </div>
