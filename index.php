@@ -15,7 +15,7 @@ $username = $_SESSION['username'] ?? 'Guest';
     <meta charset="UTF-8">
     <title>Urban Arts - Home</title>
 
-    <!-- ABSOLUTE PATHS (IMPORTANT) -->
+    <!-- ABSOLUTE PATHS -->
     <link rel="stylesheet" href="/urbanarts/css/styles.css">
     <link rel="icon" type="image/x-icon" href="/urbanarts/images/articon.png">
 </head>
@@ -113,16 +113,46 @@ $username = $_SESSION['username'] ?? 'Guest';
             <h3 class="results-title">Artworks Gallery</h3>
 
             <div class="artwork-results">
-                <p class="results-placeholder">
-                    Artworks will appear here.
-                </p>
+                <?php
+                $sql = "
+                    SELECT a.artwork_id, a.title, a.description, a.location,
+                           u.username
+                    FROM Artworks a
+                    JOIN Users u ON a.user_id = u.user_id
+                    ORDER BY a.created_at DESC
+                ";
+
+                $result = $conn->query($sql);
+
+                if ($result->num_rows === 0) {
+                    echo '<p class="results-placeholder">No artworks uploaded yet.</p>';
+                } else {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '
+                        <div style="
+                            margin-bottom: 20px;
+                            padding: 15px;
+                            border: 1px solid #eee;
+                            border-radius: 8px;
+                        ">
+                            <h4>' . htmlspecialchars($row['title']) . '</h4>
+                            <p>' . htmlspecialchars($row['description']) . '</p>
+                            <small>
+                                Artist: ' . htmlspecialchars($row['username']) . ' |
+                                Location: ' . htmlspecialchars($row['location']) . '
+                            </small>
+                        </div>
+                        ';
+                    }
+                }
+                ?>
             </div>
         </div>
 
     </div>
 </div>
 
-<!-- ===== JS (ABSOLUTE PATH) ===== -->
+<!-- ===== JS ===== -->
 <script src="/urbanarts/js/artworks.js"></script>
 
 </body>
