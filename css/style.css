@@ -1,10 +1,48 @@
-/* ===== HOME PAGE SPECIFIC STYLES ===== */
+/* ===== GLOBAL RESET (IMPORTANT FIX) ===== */
+* {
+    box-sizing: border-box;
+}
 
-/* Banner */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+/* ===== TOP NAVIGATION ===== */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1f1f1f;
+    padding: 15px 30px;
+}
+
+.top-nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+    font-weight: 600;
+}
+
+.top-nav a:last-child {
+    margin-right: 0;
+}
+
+.top-nav a:hover {
+    text-decoration: underline;
+}
+
+.nav-logo a {
+    font-size: 1.2rem;
+}
+
+/* ===== BANNER ===== */
 .banner-container {
     width: 100%;
     overflow: hidden;
-    margin-bottom: 30px;
+    margin: 0; /* FIX: removed bottom gap */
 }
 
 .banner-image {
@@ -13,13 +51,13 @@
     display: block;
 }
 
-/* Welcome Section */
+/* ===== WELCOME SECTION ===== */
 .welcome-section {
     text-align: center;
-    padding: 40px 20px;
+    padding: 60px 20px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    margin-bottom: 40px;
+    margin: 0; /* FIX: removed margin collapse issue */
 }
 
 .welcome-section h1 {
@@ -38,7 +76,7 @@
     margin-bottom: 30px;
 }
 
-/* Quick Links */
+/* ===== QUICK LINKS ===== */
 .quick-links {
     display: flex;
     justify-content: center;
@@ -77,10 +115,10 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Filter Container */
+/* ===== FILTER CONTAINER ===== */
 .filter-container {
     max-width: 1200px;
-    margin: 0 auto 50px;
+    margin: 40px auto;
     padding: 0 20px;
 }
 
@@ -90,7 +128,7 @@
     gap: 30px;
 }
 
-/* Filter Sidebar */
+/* ===== FILTER SIDEBAR ===== */
 .filter-sidebar {
     background: #f8f9fa;
     padding: 25px;
@@ -133,14 +171,13 @@
     border-radius: 8px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background 0.3s;
 }
 
 .filter-button:hover {
     background: #1a252f;
 }
 
-/* Stats Box */
+/* ===== STATS BOX ===== */
 .stats-box {
     background: white;
     padding: 20px;
@@ -181,13 +218,7 @@
     color: #2c3e50;
 }
 
-.no-stats {
-    color: #666;
-    text-align: center;
-    font-style: italic;
-}
-
-/* Results Area */
+/* ===== RESULTS AREA ===== */
 .results-main {
     background: white;
     padding: 25px;
@@ -202,121 +233,27 @@
 }
 
 .artwork-results {
-    min-height: 400px;
+    min-height: 300px; /* FIX: reduced height */
 }
 
-.results-placeholder {
-    text-align: center;
-    color: #666;
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-}
-
-.results-subtext {
-    text-align: center;
-    color: #888;
-    font-size: 0.95rem;
-}
-
-/* Loading and Error States */
+/* ===== LOADING / ERROR ===== */
 .loading {
     text-align: center;
     padding: 50px;
     color: #666;
-    font-style: italic;
 }
 
 .error-message {
     text-align: center;
-    padding: 50px;
+    padding: 30px;
     color: #e74c3c;
     background: #fee;
     border-radius: 8px;
 }
 
-/* Modal Styles */
-.modal-backdrop {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 999;
-}
-
-.artwork-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    z-index: 1000;
-    max-width: 700px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-}
-
-.modal-close-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    background: none;
-    border: none;
-    font-size: 28px;
-    cursor: pointer;
-    color: #666;
-    line-height: 1;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-}
-
-.modal-close-btn:hover {
-    color: #333;
-}
-
-.modal-content {
-    padding-top: 10px;
-}
-
-/* Responsive */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
     .filter-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .filter-sidebar {
-        order: 2;
-    }
-    
-    .results-main {
-        order: 1;
-    }
-    
-    .quick-links {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .btn {
-        width: 80%;
-        max-width: 300px;
-    }
-}
-
-@media (max-width: 600px) {
-    .welcome-section h1 {
-        font-size: 2rem;
-    }
-    
-    .stats-grid {
         grid-template-columns: 1fr;
     }
 }
