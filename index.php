@@ -15,35 +15,27 @@ $username = $_SESSION['username'] ?? 'Guest';
     <meta charset="UTF-8">
     <title>Urban Arts - Home</title>
 
-    <!-- ABSOLUTE PATHS -->
     <link rel="stylesheet" href="/urbanarts/css/styles.css">
-    <link rel="icon" type="image/x-icon" href="/urbanarts/images/articon.png">
+    <link rel="icon" type="image/x-icon" href="/urbanarts/images/favicon.png">
 </head>
 <body>
 
-<!-- ===== BANNER ===== -->
-<div class="banner-container">
-    <img src="/urbanarts/images/banner.png"
-         alt="Urban Arts Banner"
-         class="banner-image">
-</div>
-
-<!-- ===== WELCOME SECTION ===== -->
-<div class="welcome-section">
+<!-- ===== HERO / WELCOME SECTION ===== -->
+<div class="hero">
     <h1>Welcome to Urban Arts Mapping</h1>
 
-    <p class="welcome-message">
+    <p class="hero-hello">
         Hello, <strong><?= htmlspecialchars($username) ?></strong>!
     </p>
 
-    <p class="welcome-subtitle">
+    <p class="hero-subtitle">
         Explore street art, vote on favorites, and connect with artists.
     </p>
 
-    <div class="quick-links">
-        <a href="#" class="btn btn-primary">Browse Artworks</a>
-        <a href="#" class="btn btn-secondary">Add New Artwork</a>
-        <a href="#" class="btn btn-tertiary">View Map</a>
+    <div class="hero-buttons">
+        <a href="gallery.php" class="hero-btn primary">Browse Artworks</a>
+        <a href="add_artwork.php" class="hero-btn outline">Add New Artwork</a>
+        <a href="shop.php" class="hero-btn outline">Shop</a>
     </div>
 </div>
 
@@ -55,13 +47,11 @@ $username = $_SESSION['username'] ?? 'Guest';
         <div class="filter-sidebar">
             <h3 class="filter-title">Filter Artworks by Artist</h3>
 
-            <form class="filter-form">
+            <form class="filter-form" onsubmit="return false;">
                 <select id="artist" class="artist-select">
                     <option value="">All Artists</option>
                     <?php
-                    $stmt = $conn->prepare(
-                        "SELECT user_id, username FROM Users ORDER BY username"
-                    );
+                    $stmt = $conn->prepare("SELECT user_id, username FROM Users ORDER BY username");
                     $stmt->execute();
                     $res = $stmt->get_result();
 
@@ -73,7 +63,7 @@ $username = $_SESSION['username'] ?? 'Guest';
                     ?>
                 </select>
 
-                <button type="button" class="filter-button">
+                <button type="button" class="filter-button" onclick="loadArtworks()">
                     Search
                 </button>
             </form>
@@ -111,52 +101,16 @@ $username = $_SESSION['username'] ?? 'Guest';
         <!-- ===== RESULTS ===== -->
         <div class="results-main">
             <h3 class="results-title">Artworks Gallery</h3>
-
             <div class="artwork-results">
-                <?php
-                $sql = "
-                    SELECT a.artwork_id, a.title, a.description, a.location,
-                           u.username
-                    FROM Artworks a
-                    JOIN Users u ON a.user_id = u.user_id
-                    ORDER BY a.created_at DESC
-                ";
-
-                $result = $conn->query($sql);
-
-                if ($result->num_rows === 0) {
-                    echo '<p class="results-placeholder">No artworks uploaded yet.</p>';
-                } else {
-                    while ($row = $result->fetch_assoc()) {
-                        echo '
-                        <div style="
-                            margin-bottom: 20px;
-                            padding: 15px;
-                            border: 1px solid #eee;
-                            border-radius: 8px;
-                        ">
-                            <h4>' . htmlspecialchars($row['title']) . '</h4>
-                            <p>' . htmlspecialchars($row['description']) . '</p>
-                            <small>
-                                Artist: ' . htmlspecialchars($row['username']) . ' |
-                                Location: ' . htmlspecialchars($row['location']) . '
-                            </small>
-                        </div>
-                        ';
-                    }
-                }
-                ?>
+                <p class="loading">Loading artworks...</p>
             </div>
         </div>
 
     </div>
 </div>
 
-<!-- ===== JS ===== -->
 <script src="/urbanarts/js/artworks.js"></script>
-
 </body>
 </html>
 
-<?php
-$conn->close();
+<?php $conn->close(); ?>

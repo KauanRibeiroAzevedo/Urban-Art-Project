@@ -1,0 +1,79 @@
+/* ===== PAGE WRAPPER ===== */
+.add-artwork-page {
+    min-height: 100vh;
+
+    background-image: url("/urbanarts/images/addwork.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Dark overlay so text is readable */
+.add-artwork-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 0;
+}
+
+/* ===== CARD ===== */
+.add-artwork-card {
+    position: relative;
+    z-index: 1;
+
+    background: rgba(255, 255, 255, 0.95);
+    width: 100%;
+    max-width: 500px;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+}
+
+/* ===== TITLE ===== */
+.add-artwork-card h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2c3e50;
+}
+
+/* ===== FORM ===== */
+.add-artwork-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.add-artwork-card input,
+.add-artwork-card textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.add-artwork-card textarea {
+    height: 120px;
+    resize: none;
+}
+
+/* ===== BUTTON ===== */
+.add-artwork-card button {
+    margin-top: 10px;
+    padding: 14px;
+    font-size: 16px;
+    background: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.add-artwork-card button:hover {
+    background: #1a252f;
+}
